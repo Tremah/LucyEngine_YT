@@ -14,6 +14,6 @@ This repository depends on the following libaries.
 
 | Project    | Link                                                                                 |
 |------------|--------------------------------------------------------------------------------------|
-| glad       | ([https://github.com/Dav1dde/glad](https://github.com/Dav1dde/glad))                 |
+| glad       | ([https://github.com/Dav1dde/glad] https://github.com/Dav1dde/glad)                 |
 | glfw       | ([https://github.com/glfw/glfw](https://github.com/glfw/glfw))                       |
 | premake    | ([https://github.com/premake/premake-core](https://github.com/premake/premake-core)) |
