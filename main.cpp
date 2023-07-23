@@ -5,51 +5,56 @@
 #include <glad/gl.h>
 #include <glfw/glfw3.h>
 
+#include <lucy/core/window.h>
 #include <lucy/renderer/renderer.h>
 
-GLFWwindow* initGlfwAndGlad()
+bool initGlad()
 {
-  //Init GLFW and create window
-  if (!glfwInit())
-  {
-    std::cout << "GLFW init failed!\n";
-    return nullptr;
-  }
-  std::cout << "GLFW init successful!\n";
-
-  auto glfwWindow = glfwCreateWindow(1600, 900, "Hello YT Window", nullptr, nullptr);
-  glfwMakeContextCurrent(glfwWindow);
-
   //Init glad
   int gladState = gladLoadGL(glfwGetProcAddress);
   if (!gladState)
   {
     //If not successful, terminate GLFW
     std::cout << "ERROR: Could not init glad!\n";
-    glfwDestroyWindow(glfwWindow);
-    glfwTerminate();
-    return nullptr;
+    return false;
   }
   std::cout << "GLAD init successful!\n";
 
-  glViewport(0, 0, 1600, 900);
-  
-
-  return glfwWindow;
+  return true;
 }
 
 int main()
-{
-  auto glfwWindow = initGlfwAndGlad();
+{  
+  Lucy::Window window{1600, 900, "LucyEngine"};
+
+  auto glfwWindow = window.init();
+
+  if (!glfwWindow)
+  {
+    return 1;
+  }
+
+  if (!initGlad())
+  {
+    return 1;
+  }
+
+  glViewport(0, 0, window.getWidth(), window.getHeight());
 
   Lucy::Renderer::init();
-  Lucy::Renderer::draw(glfwWindow);  
 
-  int x = 0;
-  std::cin >> x;
+  while (!glfwWindowShouldClose(glfwWindow))
+  {
+    glfwPollEvents();
 
+    Lucy::Renderer::draw(glfwWindow);
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+      break;
+    }
+  }
+
+  window.shutdown();
   return 0; 
 } 
-
-
-//GLAD Link: https://gen.glad.sh/
