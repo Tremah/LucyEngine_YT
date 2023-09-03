@@ -104,7 +104,7 @@ namespace Lucy
     glDeleteShader(fragmentShader);
   }
 
-  void Renderer::draw(GLFWwindow* window)
+  void Renderer::draw()
   {
     glClearColor(0.2f, 0.2f, 0.2f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -115,8 +115,6 @@ namespace Lucy
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
-
-    glfwSwapBuffers(window);
   }
 
 }

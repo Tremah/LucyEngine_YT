@@ -12,6 +12,6 @@ namespace Lucy
 
     static void init();
 
-    static void draw(GLFWwindow* window);
+    static void draw();
   };
 }
