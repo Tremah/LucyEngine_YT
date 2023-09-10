@@ -29,15 +29,14 @@ void Lucy::Game::run()
   {
     glfwPollEvents();
 
-    running_ = !glfwWindowShouldClose(window_.getNativeWindow());
 
     Lucy::Renderer::draw();
 
     glfwSwapBuffers(window_.getNativeWindow());
 
-    if (glfwGetKey(window_.getNativeWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window_.getNativeWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(window_.getNativeWindow()))
     {
-      break;
+      running_ = false;
     }
   }
 }
