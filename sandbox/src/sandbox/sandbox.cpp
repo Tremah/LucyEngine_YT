@@ -3,12 +3,13 @@
 #include <vector>
 
 #include <lucy/core/game.h>
-
-
+#include <sandbox/sandbox_layer.h>
 
 int main()
-{    
+{
   Lucy::Game game;
+
+  game.addLayer(new Sandbox::SandboxLayer{});
 
   game.start();
 
@@ -16,5 +17,5 @@ int main()
 
   game.shutdown();
 
-  return 0; 
-} 
+  return 0;
+}

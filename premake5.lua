@@ -1,7 +1,7 @@
 workspace "LucyEngine_YT"
   location "./"
   architecture "x86_64"
-  startproject "LucyEngine"
+  startproject "Sandbox"
 
   configurations
   {
@@ -18,3 +18,4 @@ workspace "LucyEngine_YT"
 include "vendor/glad"
 include "vendor/glfw"
 include "lucy/"
+include "sandbox/"

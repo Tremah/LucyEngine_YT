@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+
 #include <lucy/renderer/renderer.h>
 
 void Lucy::Game::start()
@@ -19,7 +20,12 @@ void Lucy::Game::start()
   glViewport(0, 0, window_.getWidth(), window_.getHeight());
 
   Lucy::Renderer::init();
-}
+
+  for (auto layer : layers_)
+  {
+    layer->init();
+  }
+} 
 
 void Lucy::Game::run()
 {
@@ -29,8 +35,10 @@ void Lucy::Game::run()
   {
     glfwPollEvents();
 
-
-    Lucy::Renderer::draw();
+    for (auto layer : layers_)
+    {
+      layer->update();
+    }
 
     glfwSwapBuffers(window_.getNativeWindow());
 
@@ -43,5 +51,15 @@ void Lucy::Game::run()
 
 void Lucy::Game::shutdown()
 {
+  for (auto layer : layers_)
+  {
+    layer->shutdown();
+    delete layer;
+  }
   window_.shutdown();
+}
+
+void Lucy::Game::addLayer(Layer* layer)
+{
+  layers_.emplace_back(layer);
 }

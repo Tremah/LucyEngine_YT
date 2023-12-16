@@ -1,5 +1,5 @@
-project "LucyEngine"
-	kind "StaticLib"
+project "Sandbox"
+	kind "ConsoleApp"
 	language "C++"
   --Where the project file is placed
   location ("./")
@@ -12,6 +12,7 @@ project "LucyEngine"
   includedirs
   {
     "src/",
+    "../lucy/src/",
     "../vendor/glad/include/",
     "../vendor/glfw/include/"
   }
@@ -26,7 +27,7 @@ project "LucyEngine"
     "src/**.inl",  
   } 
 
-  links { "glad", "glfw"}
+  links { "glad", "glfw", "LucyEngine"}
 
   filter "system:windows"
     cppdialect "C++20"

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include <lucy/core/window.h>
+#include <lucy/core/layer.h>
 
 namespace Lucy
 {
@@ -16,9 +19,13 @@ namespace Lucy
     //Destroy the window
     void shutdown();
 
+    void addLayer(Layer* layer);
+
   private:
     bool running_ = false;
     Window window_{1600, 900, "LucyEngine"};
+
+    std::vector<Layer*> layers_; 
 
 
   };
