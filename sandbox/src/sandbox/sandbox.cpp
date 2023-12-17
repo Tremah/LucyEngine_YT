@@ -1,21 +1,21 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include <lucy/core/game.h>
 #include <sandbox/sandbox_layer.h>
 
-int main()
+class SandboxGame : public Lucy::Game
 {
-  Lucy::Game game;
+public:
+  SandboxGame(const std::string& name) : Game(name)
+  {
+    addLayer(new Sandbox::SandboxLayer{});
+  }
+};
 
-  game.addLayer(new Sandbox::SandboxLayer{});
-
-  game.start();
-
-  game.run();
-
-  game.shutdown();
-
-  return 0;
+std::unique_ptr<Lucy::Game> Lucy::createGame()
+{
+  return std::make_unique<SandboxGame>("Sandbox");
 }
